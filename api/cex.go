@@ -31,11 +31,13 @@ func GetRate(currency string) (*data.Rate, error) {
 	}
 
 	// Parse the JSON and store the parsed data
-	var crypoRate data.Rate
-	err = json.Unmarshal(bodyBtyes, &crypoRate)
+	var response CEXResponse
+	err = json.Unmarshal(bodyBtyes, &response)
 	if err != nil {
 		return nil, err
 	}
+
+	crypoRate := data.Rate{Currency: currency, Price: response.Bid}
 
 	return &crypoRate, nil
 }
