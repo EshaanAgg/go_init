@@ -14,9 +14,13 @@ const apiUrl = "https://cex.io/api/ticker/%s/USD"
 
 // We typically return pointers to response types as they can be nil when there is an error
 func GetRate(currency string) (*data.Rate, error) {
+	if len(currency) != 3 {
+		return nil, fmt.Errorf("invalid currency code")
+	}
+
 	// Make the API request
 	res, err := http.Get(fmt.Sprintf(apiUrl, strings.ToUpper(currency)))
-	
+
 	if err != nil {
 		return nil, err
 	}
