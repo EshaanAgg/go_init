@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", handleRoot)
+	http.HandleFunc("/status", handleStatusCheck)
 	
 	server := http.NewServeMux()
 	err := http.ListenAndServe(":3333", server)
@@ -18,6 +18,6 @@ func main() {
 	fmt.Println("The server is running on port 3333.")
 }
 
-func handleRoot(w http.ResponseWriter, r *http.Request) {
+func handleStatusCheck(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("The server is up and running!"))
 }
